@@ -53,30 +53,19 @@ let isNewGame = true;
 function renderCanvas() {
   context.fillStyle = 'black'
   context.fillRect(0, 0, width, height)
-
   context.fillStyle = 'white'
-
-  
   context.fillRect(paddleBottomX, height - 20, paddleWidth, paddleHeight)
-
-  
   context.fillRect(paddleTopX, 10, paddleWidth, paddleHeight)
-
-  
   context.beginPath()
   context.setLineDash([4])
   context.moveTo(0, 350)
   context.lineTo(500, 350)
   context.strokeStyle = 'grey'
   context.stroke()
-
-  
   context.beginPath()
   context.arc(ballX, ballY, ballRadius, 2 * Math.PI, false)
   context.fillStyle = 'white'
   context.fill()
-
-  
   context.font = '32px Courier New'
   context.fillText(playerScore, 20, canvas.height / 2 + 50)
   context.fillText(computerScore, 20, canvas.height / 2 - 30)
@@ -100,9 +89,7 @@ function ballReset() {
 
 
 function ballMove() {
-  
   ballY += -speedY
-  
   if (playerMoved && paddleContact) {
     ballX += speedX
   }
@@ -135,7 +122,6 @@ function ballBoundaries() {
       trajectoryX = ballX - (paddleBottomX + paddleDiff)
       speedX = trajectoryX * 0.3
     } else if (ballY > height) {
-      
       ballReset()
       computerScore++
     }
@@ -143,7 +129,6 @@ function ballBoundaries() {
   
   if (ballY < paddleDiff) {
     if (ballX > paddleTopX && ballX < paddleTopX + paddleWidth) {
-      
       if (playerMoved) {
         speedY += 1
         
@@ -175,14 +160,11 @@ function showGameOverEl(winner) {
   canvas.hidden = true
   gameOverEl.textContent = '';
   gameOverEl.classList.add('game-over-container');
-  
   const title = document.createElement('h1');
   title.textContent = `${winner} Wins!`;
-  
   const playAgainBtn = document.createElement('button');
   playAgainBtn.setAttribute('onclick', 'startGame()');
   playAgainBtn.textContent = 'Play Again';
-  
   gameOverEl.append(title, playAgainBtn)
   body.appendChild(gameOverEl)
   
@@ -215,7 +197,7 @@ function startGame() {
   if (isGameOver && !isNewGame) {
     body.removeChild(gameOverEl)
     canvas.hidden = false
-   }
+  }
   isGameOver = false
   isNewGame = false
   playerScore = 0
