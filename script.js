@@ -90,9 +90,6 @@ function createCanvas() {
   renderCanvas()
 }
 
-// Remove this
-createCanvas()
-
 // Reset Ball to Center
 function ballReset() {
   ballX = width / 2
@@ -202,16 +199,16 @@ function gameOver() {
   // }
 }
 
-// Called Every Frame
+
 function animate() {
   renderCanvas()
   ballMove()
   ballBoundaries()
   computerAI()
-  
+  window.requestAnimationFrame(animate)
 }
 
-// Start Game, Reset Everything
+
 function startGame() {
   // if (isGameOver && !isNewGame) {
 
@@ -224,10 +221,11 @@ function startGame() {
   ballReset()
   createCanvas()
   animate()
+ 
   canvas.addEventListener('mousemove', (e) => {
     console.log(e.clientX)
     playerMoved = true
-    // Compensate for canvas being centered
+    
     paddleBottomX = e.clientX - canvasPosition - paddleDiff;
     if (paddleBottomX < paddleDiff) {
       paddleBottomX = 0
@@ -235,10 +233,9 @@ function startGame() {
     if (paddleBottomX > width - paddleWidth) {
       paddleBottomX = width - paddleWidth;
     }
-    // Hide Cursor
+    
     canvas.style.cursor = 'none'
   });
 }
 
-// On Load
-// startGame();
+startGame()
